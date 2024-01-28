@@ -35,7 +35,20 @@
 <br>
     <div>
     <input type="submit" style="margin-left:300px" name="btnInsert" id="submit" ng-click="insertData()"class="btn btn-success" value="ADD">
-    </div>
+    </div><br>
+
+    <!-- table -->
+    <table class="table table-bordered">  
+     <tr>  
+         <th>Product Name</th>  
+        <th>Product Description</th> 
+        <th>Actions</th>
+    </tr>  
+        <tr ng-repeat="x in names">  
+            <td>{{x.product_name}}</td>  
+            <td>{{x.product_description}}</td>  
+         </tr>  
+    </table>  
    </div>
 
 </div>
@@ -52,15 +65,19 @@ app.controller("mycontroller", function($scope, $http){
 // $scope.btnName="ADD";
 // $scope.product_id=0;
     $scope.insertData = function(){
-
+        // let data = {'prodname':$scope.prodname, 'pdescription':$scope.pdescription};
+         $info =  {'prodname':$scope.prodname, 'pdescription':$scope.pdescription};
+         //console.log(data);
         $http.post(
             "insert.php",
-            {'prodname':$scope.prodname, 'pdescription':$scope.pdescription}
-        ).success(function(data){
-            alert(data);
+            $info
+           //data
+        ).then(function(data){
+           // alert(data);
             $scope.prodname=null;
             $scope.pdescription=null;
+            //console.log(data)
         });
     }
 });
-    </script>
+</script>
